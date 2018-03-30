@@ -106,7 +106,6 @@ public class PlayPanel {
 		gbc_lblNumberOfOgres.gridx = 0;
 		gbc_lblNumberOfOgres.gridy = 1;
 		settings.add(lblNumberOfOgres, gbc_lblNumberOfOgres);
-		//frame.getContentPane().add(lblNumberOfOgres);
 
 		numberOgres = new JTextField();
 		GridBagConstraints gbc_numberOgres = new GridBagConstraints();
@@ -116,8 +115,7 @@ public class PlayPanel {
 		gbc_numberOgres.gridx = 2;
 		gbc_numberOgres.gridy = 1;
 		settings.add(numberOgres, gbc_numberOgres);
-		//frame.getContentPane().add(numberOgres);
-
+		
 		numberOgres.setColumns(10);
 		JLabel lblGuardPersonality = new JLabel("Guard Personality");
 		GridBagConstraints gbc_lblGuardPersonality = new GridBagConstraints();
@@ -208,7 +206,6 @@ public class PlayPanel {
 		gameArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		gameArea.setLayout(new GridLayout(1, 0, 0, 0));
 		frame.getContentPane().add(gameArea);
-		//frame.getContentPane().add(lblYou);
 		frame.getContentPane().add(exitButtons);
 		GridBagLayout gbl_exitButtons = new GridBagLayout();
 		gbl_exitButtons.columnWidths = new int[]{217, 0};
