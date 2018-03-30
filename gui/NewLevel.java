@@ -255,6 +255,21 @@ public class NewLevel {
 		}
 	}
 	public boolean canSaveMap() {
+		int ogresNumber=verifyAllElements();
+		if (hasHero && hasKey && hasOgre && hasWall && hasExitDoor && ogresNumber<5) {
+			PlayPanel other=null;
+			try {
+				other = new PlayPanel();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			other.frame.setVisible(true);
+			other.editableLevel(map);
+			return true;
+		}
+		return false;
+	}
+	public int verifyAllElements() {
 		int ogresNumber=0;
 		for (int i =0;i<map.length;i++)
 			for (int j = 0;  j< map.length;j++) {
@@ -277,17 +292,6 @@ public class NewLevel {
 					break;
 				}
 			}
-		if (hasHero && hasKey && hasOgre && hasWall && hasExitDoor && ogresNumber<5) {
-			PlayPanel other=null;
-			try {
-				other = new PlayPanel();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			other.frame.setVisible(true);
-			other.editableLevel(map);
-			return true;
-		}
-		return false;
+		return ogresNumber;
 	}
 }
