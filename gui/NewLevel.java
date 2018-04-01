@@ -81,21 +81,12 @@ public class NewLevel {
 	}
 
 	private void initializeMainButtons() {
-		JButton btnSave = new JButton("Save and Play");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int selectedOption=JOptionPane.showConfirmDialog(null,  "Are you sure that you want to save the map and play?", "Play with new map", JOptionPane.YES_NO_OPTION); 
-				if (selectedOption==JOptionPane.YES_OPTION) {
-					if (!canSaveMap())
-					JOptionPane.showMessageDialog(null, "To play with your own map, you need to place all the game elements(walls, exit door, key, Ogres, hero) ");
-				}
-				else return;
-				gameArea.setMaze(map);
-			}
-		});
-		btnSave.setBounds(184, 199, 89, 23);
-		frame.getContentPane().add(btnSave);
+		initializeSaveButton();
 
+		initializeMainMenuButton();
+	}
+
+	private void initializeMainMenuButton() {
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			MenuPanel other=null;
@@ -117,6 +108,23 @@ public class NewLevel {
 		});
 		btnMainMenu.setBounds(324, 199, 100, 23);
 		frame.getContentPane().add(btnMainMenu);
+	}
+
+	private void initializeSaveButton() {
+		JButton btnSave = new JButton("Save and Play");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int selectedOption=JOptionPane.showConfirmDialog(null,  "Are you sure that you want to save the map and play?", "Play with new map", JOptionPane.YES_NO_OPTION); 
+				if (selectedOption==JOptionPane.YES_OPTION) {
+					if (!canSaveMap())
+					JOptionPane.showMessageDialog(null, "To play with your own map, you need to place all the game elements(walls, exit door, key, Ogres, hero) ");
+				}
+				else return;
+				gameArea.setMaze(map);
+			}
+		});
+		btnSave.setBounds(184, 199, 89, 23);
+		frame.getContentPane().add(btnSave);
 	}
 
 	private void initializeElementsButtons() {
