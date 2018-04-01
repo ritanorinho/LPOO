@@ -103,10 +103,7 @@ public class PlayPanel {
 		initializeSettings();
 		initializeMoveButtons();
 		initializeExitButton();
-
-
-
-
+		
 		lblYou = new JLabel("You can start a new game");
 		GridBagConstraints gbc_lblYou = new GridBagConstraints();
 		gbc_lblYou.insets = new Insets(0, 0, 5, 0);
@@ -137,7 +134,10 @@ public class PlayPanel {
 		gbl_exitButtons.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gbl_exitButtons.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		exitButtons.setLayout(gbl_exitButtons);
-		mainMenu = new JButton("Restart");
+		initializeMainMenuButton();
+	}
+	public void initializeMainMenuButton() {
+		mainMenu = new JButton("Main Menu");
 		GridBagConstraints gbc_Restart = new GridBagConstraints();
 		gbc_Restart.insets = new Insets(0, 0, 5, 0);
 		gbc_Restart.gridx = 0;
