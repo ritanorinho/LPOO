@@ -51,9 +51,11 @@ public class PlayPanel {
 	private JButton btnRight;
 	private JButton btnDown;
 	private String guard="Drunken";
+	private JPanel settings;
 	public int ogresNumber=1;
 	private JTextField numberOgres;
 	private JComboBox guardPersonality;
+	private JPanel exitButtons;
 	/**
 	 * Launch the application.
 	 */
@@ -99,7 +101,30 @@ public class PlayPanel {
 
 		initializeSettings();
 		initializeMoveButtons();
-		JPanel exitButtons= new JPanel();
+		initializeExitButton();
+
+
+
+
+		lblYou = new JLabel("You can start a new game");
+		GridBagConstraints gbc_lblYou = new GridBagConstraints();
+		gbc_lblYou.insets = new Insets(0, 0, 5, 0);
+		gbc_lblYou.gridx = 0;
+		gbc_lblYou.gridy = 5;
+		exitButtons.add(lblYou, gbc_lblYou);
+		gameArea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				pressedKey(e);
+			}
+		});
+		gameArea.requestFocusInWindow();
+		JPanel game_1 = new JPanel();
+
+		newGamePressed();
+	}
+	private void initializeExitButton() {
+		exitButtons= new JPanel();
 		gameArea = new GamePanel();
 		gameArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		gameArea.setLayout(new GridLayout(1, 0, 0, 0));
@@ -131,26 +156,6 @@ public class PlayPanel {
 				gameArea.requestFocusInWindow();
 			}
 		});
-
-
-
-
-		lblYou = new JLabel("You can start a new game");
-		GridBagConstraints gbc_lblYou = new GridBagConstraints();
-		gbc_lblYou.insets = new Insets(0, 0, 5, 0);
-		gbc_lblYou.gridx = 0;
-		gbc_lblYou.gridy = 5;
-		exitButtons.add(lblYou, gbc_lblYou);
-		gameArea.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				pressedKey(e);
-			}
-		});
-		gameArea.requestFocusInWindow();
-		JPanel game_1 = new JPanel();
-		
-		newGamePressed();
 	}
 	private void initializeMoveButtons() {
 		JPanel moveButtons = new JPanel();
@@ -216,32 +221,17 @@ public class PlayPanel {
 		moveButtons.add(btnDown, gbc_btnDown);
 	}
 	private void initializeSettings() {
-		JPanel settings = new JPanel();
+		settings = new JPanel();
 		GridBagLayout gbl_settings = new GridBagLayout();
 		gbl_settings.columnWidths = new int[]{108, 0, 108, 0};
 		gbl_settings.rowHeights = new int[]{68, 0, 0, 0, 0, 68, 0};
 		gbl_settings.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_settings.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		settings.setLayout(gbl_settings);
-		JLabel lblNumberOfOgres = new JLabel("Number of ogres");
-		GridBagConstraints gbc_lblNumberOfOgres = new GridBagConstraints();
-		gbc_lblNumberOfOgres.fill = GridBagConstraints.BOTH;
-		gbc_lblNumberOfOgres.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNumberOfOgres.gridx = 0;
-		gbc_lblNumberOfOgres.gridy = 1;
-		settings.add(lblNumberOfOgres, gbc_lblNumberOfOgres);
-
-		numberOgres = new JTextField();
-		
-		numberOgres.setEnabled(false);
-		GridBagConstraints gbc_numberOgres = new GridBagConstraints();
-		gbc_numberOgres.gridwidth = 2;
-		gbc_numberOgres.fill = GridBagConstraints.BOTH;
-		gbc_numberOgres.insets = new Insets(0, 0, 5, 0);
-		gbc_numberOgres.gridx = 2;
-		gbc_numberOgres.gridy = 1;
-		settings.add(numberOgres, gbc_numberOgres);
-		numberOgres.setColumns(10);
+		initializeNumberOgresTextField();
+		initializeGuardPersonality();
+	}
+	private void initializeGuardPersonality() {
 		JLabel lblGuardPersonality = new JLabel("Guard Personality");
 		GridBagConstraints gbc_lblGuardPersonality = new GridBagConstraints();
 		gbc_lblGuardPersonality.fill = GridBagConstraints.BOTH;
@@ -251,7 +241,7 @@ public class PlayPanel {
 		settings.add(lblGuardPersonality, gbc_lblGuardPersonality);
 		guardPersonality = new JComboBox();
 		guardPersonality.setModel(new DefaultComboBoxModel(new String[] {"Rookie", "Drunken", "Suspicious"}));
-		
+
 		switch(guard) {
 		case "Rookie":
 			guardPersonality.setSelectedIndex(0);
@@ -274,9 +264,30 @@ public class PlayPanel {
 		gbc_guardPersonality.gridx = 2;
 		gbc_guardPersonality.gridy = 2;
 		settings.add(guardPersonality, gbc_guardPersonality);
-		
+
 		guardPersonality.setEnabled(false);
 		frame.getContentPane().add(settings);
+	}
+	private void initializeNumberOgresTextField() {
+		JLabel lblNumberOfOgres = new JLabel("Number of ogres");
+		GridBagConstraints gbc_lblNumberOfOgres = new GridBagConstraints();
+		gbc_lblNumberOfOgres.fill = GridBagConstraints.BOTH;
+		gbc_lblNumberOfOgres.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNumberOfOgres.gridx = 0;
+		gbc_lblNumberOfOgres.gridy = 1;
+		settings.add(lblNumberOfOgres, gbc_lblNumberOfOgres);
+
+		numberOgres = new JTextField();
+
+		numberOgres.setEnabled(false);
+		GridBagConstraints gbc_numberOgres = new GridBagConstraints();
+		gbc_numberOgres.gridwidth = 2;
+		gbc_numberOgres.fill = GridBagConstraints.BOTH;
+		gbc_numberOgres.insets = new Insets(0, 0, 5, 0);
+		gbc_numberOgres.gridx = 2;
+		gbc_numberOgres.gridy = 1;
+		settings.add(numberOgres, gbc_numberOgres);
+		numberOgres.setColumns(10);
 	}
 
 	private void newGamePressed() {
