@@ -183,7 +183,6 @@ public class Gamestate {
 			setGuard(rookie2);
 
 		}
-		System.out.println("OGRES INITIAL:"+ogres.size());
 		for(int i =0; i <numberOgres;++i) {
 			auxOgre.setX(1);
 			auxOgre.setY(4);
@@ -193,8 +192,6 @@ public class Gamestate {
 			ogres.add(i,auxOgre);
 		}
 		setOgres(ogres);
-		int aux= ogres.size()-1;
-		System.out.println("OGRES :"+ogres.size());
 	}
 	public void start(boolean application,String gua, int numberOgres) {
 		Hero hero = new Hero();
@@ -249,17 +246,7 @@ public class Gamestate {
 
 		switch (currentMap[hero.x][hero.y]) {
 		case " ":
-			if(hero.hasKey) {
-				currentMap[hero.x][hero.y]="K";
-			}
-			else if(level == 2) {
-				currentMap[hero.x][hero.y]="A";
-
-			}
-
-			else {
-				currentMap[hero.x][hero.y]="H";
-			}
+			heroHasKey();
 			break;
 		case "k":
 			if (level==1) {
@@ -271,27 +258,49 @@ public class Gamestate {
 			break;
 
 		case "I":
-			if(hero.hasKey) {
-				currentMap[hero.x][hero.y]="S";
-				gameState(1);
-			}
-			else {
-				heroDefaultMovement();
-			}
+			changeS();
 
 			break;
 
 		case "S":
-			if(level == 1) {
-				setLevel(2);	
-			} 
-			else 
-				gameWon=true;
+			heroChangeLevel();
 			break;
 		default:
 			heroDefaultMovement();
 		}
 		hero.updatePosition();
+	}
+
+	public void changeS() {
+		if(hero.hasKey) {
+			currentMap[hero.x][hero.y]="S";
+			gameState(1);
+		}
+		else {
+			heroDefaultMovement();
+		}
+	}
+
+	public void heroChangeLevel() {
+		if(level == 1) {
+			setLevel(2);	
+		} 
+		else 
+			gameWon=true;
+	}
+
+	public void heroHasKey() {
+		if(hero.hasKey) {
+			currentMap[hero.x][hero.y]="K";
+		}
+		else if(level == 2) {
+			currentMap[hero.x][hero.y]="A";
+
+		}
+
+		else {
+			currentMap[hero.x][hero.y]="H";
+		}
 	}
 
 
