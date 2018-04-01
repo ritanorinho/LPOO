@@ -249,17 +249,11 @@ public class Gamestate {
 			heroHasKey();
 			break;
 		case "k":
-			if (level==1) {
-				currentMap[5][0] = "S";
-				currentMap[6][0] = "S";
-			}
-			currentMap[hero.x][hero.y]="K";
-			hero.hasKey=true;
+			heroChangeK();
 			break;
 
 		case "I":
 			changeS();
-
 			break;
 
 		case "S":
@@ -269,6 +263,15 @@ public class Gamestate {
 			heroDefaultMovement();
 		}
 		hero.updatePosition();
+	}
+
+	public void heroChangeK() {
+		if (level==1) {
+			currentMap[5][0] = "S";
+			currentMap[6][0] = "S";
+		}
+		currentMap[hero.x][hero.y]="K";
+		hero.hasKey=true;
 	}
 
 	public void changeS() {
@@ -364,16 +367,7 @@ public class Gamestate {
 			if (currentMap[hero.x+1][hero.y] =="g")return false;
 		}
 
-		else {
-			if (currentMap[hero.x-1][hero.y] =="G")return false;
-			if (currentMap[hero.x][hero.y+1] =="G")return false;
-			if (currentMap[hero.x+1][hero.y] =="G")return false;
-			if (currentMap[hero.x][hero.y-1] =="G")return false;
-			if (currentMap[hero.x-1][hero.y] =="g")return false;
-			if (currentMap[hero.x][hero.y+1] =="g")return false;
-			if (currentMap[hero.x+1][hero.y] =="g")return false;
-			if (currentMap[hero.x][hero.y-1] =="g")return false;
-		}
+		if (!isFreeDefault("G","g"))return false;
 
 		return true;
 	}
@@ -383,16 +377,18 @@ public class Gamestate {
 
 		if (!isFreeOgreY()) return false;
 
-		else {
-			if (currentMap[hero.x-1][hero.y] =="O")return false;
-			if (currentMap[hero.x][hero.y+1] =="O")return false;
-			if (currentMap[hero.x+1][hero.y] =="O")return false;
-			if (currentMap[hero.x][hero.y-1] =="O")return false;
-			if (currentMap[hero.x-1][hero.y] =="*")return false;
-			if (currentMap[hero.x][hero.y+1] =="*")return false;
-			if (currentMap[hero.x+1][hero.y] =="*")return false;
-			if (currentMap[hero.x][hero.y-1] =="*")return false;
-		}
+		if (!isFreeDefault("O","*"))return false;
+		return true;
+	}
+	public boolean isFreeDefault(String type,String type2) {
+		if (currentMap[hero.x-1][hero.y] ==type)return false;
+		if (currentMap[hero.x][hero.y+1] ==type)return false;
+		if (currentMap[hero.x+1][hero.y] ==type)return false;
+		if (currentMap[hero.x][hero.y-1] ==type)return false;
+		if (currentMap[hero.x-1][hero.y] ==type2)return false;
+		if (currentMap[hero.x][hero.y+1] ==type2)return false;
+		if (currentMap[hero.x+1][hero.y] ==type2)return false;
+		if (currentMap[hero.x][hero.y-1] ==type2)return false;
 		return true;
 	}
 	public boolean isFreeOgreX() {
