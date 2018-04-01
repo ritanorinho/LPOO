@@ -294,17 +294,21 @@ public class NewLevel {
 	public boolean canSaveMap() {
 		int ogresNumber=verifyAllElements();
 		if (hasHero && hasKey && hasOgre && hasWall && hasExitDoor && ogresNumber<5) {
-			PlayPanel other=null;
-			try {
-				other = new PlayPanel();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			other.frame.setVisible(true);
-			other.editableLevel(map);
-			return true;
+			return generatePlayPanel();
 		}
 		else  return false;
+	}
+
+	public boolean generatePlayPanel() {
+		PlayPanel other=null;
+		try {
+			other = new PlayPanel();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		other.frame.setVisible(true);
+		other.editableLevel(map);
+		return true;
 	}
 	public int verifyAllElements() {
 		int ogresNumber=0;
