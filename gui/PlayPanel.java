@@ -104,6 +104,13 @@ public class PlayPanel {
 		initializeMoveButtons();
 		initializeExitButton();
 		
+		getFocus();
+		gameArea.requestFocusInWindow();
+		JPanel game_1 = new JPanel();
+
+		newGamePressed();
+	}
+	public void getFocus() {
 		lblYou = new JLabel("You can start a new game");
 		GridBagConstraints gbc_lblYou = new GridBagConstraints();
 		gbc_lblYou.insets = new Insets(0, 0, 5, 0);
@@ -116,10 +123,6 @@ public class PlayPanel {
 				pressedKey(e);
 			}
 		});
-		gameArea.requestFocusInWindow();
-		JPanel game_1 = new JPanel();
-
-		newGamePressed();
 	}
 	private void initializeExitButton() {
 		exitButtons= new JPanel();
