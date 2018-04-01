@@ -16,7 +16,7 @@ import java.io.IOException;
 public class SettingsPanel {
 
 	public JFrame frame;
-	private JTextField numberOgres;
+	public JTextField numberOgres;
 	private JLabel lblNumberOfOgres;
 	private JComboBox guardPersonality;
 	public String guard;
@@ -55,28 +55,34 @@ public class SettingsPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		numberOgres = new JTextField();
-		numberOgres.setText("1");
-		numberOgres.setToolTipText("");
-		numberOgres.setBounds(196, 63, 91, 20);
-		frame.getContentPane().add(numberOgres);
-		numberOgres.setColumns(10);
+		initializeSettingsButtons();
 		
-	   lblNumberOfOgres = new JLabel("Number of ogres");
-		lblNumberOfOgres.setBounds(95, 66, 101, 14);
-		frame.getContentPane().add(lblNumberOfOgres);
+		initializeMainButtons();
 		
-		 guardPersonality = new JComboBox();
-		guardPersonality.setModel(new DefaultComboBoxModel(new String[] {"Rookie", "Drunken", "Suspicious"}));
-		guardPersonality.setSelectedIndex(0);
-		guardPersonality.setToolTipText("Rookie\r\n");
-		guardPersonality.setBounds(196, 94, 91, 20);
-		frame.getContentPane().add(guardPersonality);
-		
-		JLabel lblGuardPersonality = new JLabel("Guard personality");
-		lblGuardPersonality.setBounds(95, 97, 91, 14);
-		frame.getContentPane().add(lblGuardPersonality);
-		
+		initializeNewLevelButton();
+	}
+
+	private void initializeNewLevelButton() {
+		JButton btnCreateNewLevel = new JButton("Create new level");
+		btnCreateNewLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NewLevel other= null;
+				 try {
+					other= new NewLevel();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 other.frame.setVisible(true);
+				 frame.setVisible(false);
+				
+			}
+		});
+		btnCreateNewLevel.setBounds(302, 123, 113, 23);
+		frame.getContentPane().add(btnCreateNewLevel);
+	}
+
+	private void initializeMainButtons() {
 		JButton btnMainMenu = new JButton("Main menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -132,34 +138,45 @@ public class SettingsPanel {
 					number=Integer.parseInt(numberOgres.getText());
 				}
 				guard=(String) guardPersonality.getItemAt(guardPersonality.getSelectedIndex());
-				int ogresNumber=Integer.parseInt(numberOgres.getText().toString());
-				other.game.setGuard((String) guardPersonality.getItemAt(guardPersonality.getSelectedIndex()));
-				other.game.setNumberOgres(Integer.parseInt(numberOgres.getText().toString()));
+				int ogresNumber=Integer.parseInt(numberOgres.getText());
+				other.setGuard(guard);
+				other.setOgresNumber(ogresNumber);
+				System.out.println(ogresNumber);
+				System.out.println(other.ogresNumber);
+
 				other.game.start(guard,ogresNumber);
+				
 				other.frame.setVisible(true);
+				System.out.println(other.game.numberOgres);
 				frame.setVisible(false);
 				
 			}
 		});
 		btnPlay.setBounds(302, 157, 111, 23);
 		frame.getContentPane().add(btnPlay);
+	}
+
+	private void initializeSettingsButtons() {
+		numberOgres = new JTextField();
+		numberOgres.setText("1");
+		numberOgres.setToolTipText("");
+		numberOgres.setBounds(196, 63, 91, 20);
+		frame.getContentPane().add(numberOgres);
+		numberOgres.setColumns(10);
 		
-		JButton btnCreateNewLevel = new JButton("Create new level");
-		btnCreateNewLevel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				NewLevel other= null;
-				 try {
-					other= new NewLevel();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				 other.frame.setVisible(true);
-				 frame.setVisible(false);
-				
-			}
-		});
-		btnCreateNewLevel.setBounds(302, 123, 113, 23);
-		frame.getContentPane().add(btnCreateNewLevel);
+	   lblNumberOfOgres = new JLabel("Number of ogres");
+		lblNumberOfOgres.setBounds(95, 66, 101, 14);
+		frame.getContentPane().add(lblNumberOfOgres);
+		
+		 guardPersonality = new JComboBox();
+		guardPersonality.setModel(new DefaultComboBoxModel(new String[] {"Rookie", "Drunken", "Suspicious"}));
+		guardPersonality.setSelectedIndex(0);
+		guardPersonality.setToolTipText("Rookie\r\n");
+		guardPersonality.setBounds(196, 94, 91, 20);
+		frame.getContentPane().add(guardPersonality);
+		
+		JLabel lblGuardPersonality = new JLabel("Guard personality");
+		lblGuardPersonality.setBounds(95, 97, 91, 14);
+		frame.getContentPane().add(lblGuardPersonality);
 	}
 }
