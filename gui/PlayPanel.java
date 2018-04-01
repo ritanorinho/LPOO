@@ -56,6 +56,7 @@ public class PlayPanel {
 	private JTextField numberOgres;
 	private JComboBox guardPersonality;
 	private JPanel exitButtons;
+	private JPanel moveButtons;
 	/**
 	 * Launch the application.
 	 */
@@ -158,7 +159,7 @@ public class PlayPanel {
 		});
 	}
 	private void initializeMoveButtons() {
-		JPanel moveButtons = new JPanel();
+		moveButtons = new JPanel();
 		GridBagLayout gbl_moveButtons = new GridBagLayout();
 		gbl_moveButtons.columnWidths = new int[]{101, 0, 0, 0, 106, 0};
 		gbl_moveButtons.rowHeights = new int[]{38, 0, 0, 0, 0, 0, 0, 43, 0};
@@ -167,20 +168,13 @@ public class PlayPanel {
 		moveButtons.setLayout(gbl_moveButtons);
 		frame.getContentPane().add(moveButtons);
 
-		btnUp = new JButton("Up");
-		GridBagConstraints gbc_btnUp = new GridBagConstraints();
-		gbc_btnUp.fill = GridBagConstraints.BOTH;
-		gbc_btnUp.insets = new Insets(0, 0, 5, 5);
-		gbc_btnUp.gridx = 2;
-		gbc_btnUp.gridy = 3;
-		moveButtons.add(btnUp, gbc_btnUp);
-		btnUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		initializeUpDownButtons();
+		initializeLeftRightButtons();
 
-				buttonPressed("U");
-			}
-		});
-
+		
+		
+	}
+	private void initializeLeftRightButtons() {
 		btnLeft = new JButton("Left");
 		GridBagConstraints gbc_btnLeft = new GridBagConstraints();
 		gbc_btnLeft.fill = GridBagConstraints.BOTH;
@@ -206,19 +200,34 @@ public class PlayPanel {
 				buttonPressed("R");
 			}
 		});
-
-		btnDown = new JButton("Down");
-		btnDown.addActionListener(new ActionListener() {
+	}
+	private void initializeUpDownButtons() {
+		btnUp = new JButton("Up");
+		GridBagConstraints gbc_btnUp = new GridBagConstraints();
+		gbc_btnUp.fill = GridBagConstraints.BOTH;
+		gbc_btnUp.insets = new Insets(0, 0, 5, 5);
+		gbc_btnUp.gridx = 2;
+		gbc_btnUp.gridy = 3;
+		moveButtons.add(btnUp, gbc_btnUp);
+		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buttonPressed("D");
+
+				buttonPressed("U");
 			}
 		});
+		
+		btnDown = new JButton("Down");
 		GridBagConstraints gbc_btnDown = new GridBagConstraints();
 		gbc_btnDown.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDown.fill = GridBagConstraints.BOTH;
 		gbc_btnDown.gridx = 2;
 		gbc_btnDown.gridy = 5;
 		moveButtons.add(btnDown, gbc_btnDown);
+		btnDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buttonPressed("D");
+			}
+		});
 	}
 	private void initializeSettings() {
 		settings = new JPanel();
