@@ -17,9 +17,9 @@ public class NewLevel {
 	private GamePanel gameArea;
 	private boolean hasHero=false;
 	private boolean hasOgre=false;
-	private boolean hasExitDoor=true;
-	private boolean hasKey=true;
-	private boolean hasWall=true;
+	private boolean hasExitDoor=false;
+	private boolean hasKey=false;
+	private boolean hasWall=false;
 	JTextField x = new JTextField();
 	JTextField y = new JTextField();
 	Object[] position = {
@@ -120,17 +120,63 @@ public class NewLevel {
 	}
 
 	private void initializeElementsButtons() {
-		JButton btnHero = new JButton("Hero");
-		btnHero.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null, position, "Hero position", JOptionPane.OK_CANCEL_OPTION);
-				chooseHeroPosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()));
+		initializeHeroButton();
+
+		initializeDoorButton();
+		
+		initializeKeyButton();
+
+		initializeWallsButton();
+
+		initializeOgreButton();
+	}
+
+	private void initializeOgreButton() {
+		JButton btnOgre = new JButton("Ogre");
+		btnOgre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showConfirmDialog(null, position, "Ogre position", JOptionPane.OK_CANCEL_OPTION);
+				if (!chooseOgrePosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()))) {
+					JOptionPane.showMessageDialog(null,"Ogre can only be placed in empty spaces");
+				}
 				gameArea.setMaze(map);
 			}
 		});
-		btnHero.setBounds(285, 66, 89, 23);
-		frame.getContentPane().add(btnHero);
+		btnOgre.setBounds(285, 32, 89, 23);
+		frame.getContentPane().add(btnOgre);
+	}
 
+	private void initializeWallsButton() {
+		JButton btnWalls = new JButton("Walls");
+		btnWalls.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showConfirmDialog(null, position, "Wall's position", JOptionPane.OK_CANCEL_OPTION);
+				if (!chooseWallPosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()))) {
+					JOptionPane.showMessageDialog(null,"Walls can only be placed in empty spaces");
+				}
+				gameArea.setMaze(map);
+			}
+		});
+		btnWalls.setBounds(285, 156, 89, 23);
+		frame.getContentPane().add(btnWalls);
+	}
+
+	private void initializeKeyButton() {
+		JButton btnKey = new JButton("Key");
+		btnKey.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showConfirmDialog(null, position, "Key position", JOptionPane.OK_CANCEL_OPTION);
+				if (!chooseKeyPosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()))) {
+					JOptionPane.showMessageDialog(null,"Key can only be placed in empty spaces or in walls");
+				}
+				gameArea.setMaze(map);
+			}
+		});
+		btnKey.setBounds(285, 126, 89, 23);
+		frame.getContentPane().add(btnKey);
+	}
+
+	private void initializeDoorButton() {
 		JButton btnDoor = new JButton("Exit Door");
 		btnDoor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -144,44 +190,19 @@ public class NewLevel {
 
 		btnDoor.setBounds(285, 96, 89, 23);
 		frame.getContentPane().add(btnDoor);
-		JButton btnKey = new JButton("Key");
-		btnKey.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null, position, "Key position", JOptionPane.OK_CANCEL_OPTION);
-				if (!chooseKeyPosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()))) {
-					JOptionPane.showMessageDialog(null,"Key can only be placed in empty spaces or in walls");
-				}
-				gameArea.setMaze(map);
-			}
-		});
-		btnKey.setBounds(285, 126, 89, 23);
-		frame.getContentPane().add(btnKey);
+	}
 
-		JButton btnWalls = new JButton("Walls");
-		btnWalls.addActionListener(new ActionListener() {
+	private void initializeHeroButton() {
+		JButton btnHero = new JButton("Hero");
+		btnHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null, position, "Wall's position", JOptionPane.OK_CANCEL_OPTION);
-				if (!chooseWallPosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()))) {
-					JOptionPane.showMessageDialog(null,"Walls can only be placed in empty spaces");
-				}
+				JOptionPane.showConfirmDialog(null, position, "Hero position", JOptionPane.OK_CANCEL_OPTION);
+				chooseHeroPosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()));
 				gameArea.setMaze(map);
 			}
 		});
-		btnWalls.setBounds(285, 156, 89, 23);
-		frame.getContentPane().add(btnWalls);
-
-		JButton btnOgre = new JButton("Ogre");
-		btnOgre.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showConfirmDialog(null, position, "Ogre position", JOptionPane.OK_CANCEL_OPTION);
-				if (!chooseOgrePosition(Integer.parseInt(x.getText()),Integer.parseInt(y.getText()))) {
-					JOptionPane.showMessageDialog(null,"Ogre can only be placed in empty spaces");
-				}
-				gameArea.setMaze(map);
-			}
-		});
-		btnOgre.setBounds(285, 32, 89, 23);
-		frame.getContentPane().add(btnOgre);
+		btnHero.setBounds(285, 66, 89, 23);
+		frame.getContentPane().add(btnHero);
 	}
 
 	public void createMap(int length) {
