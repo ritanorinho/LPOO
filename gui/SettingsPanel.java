@@ -1,5 +1,5 @@
 package dkeep.gui;
- 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -54,11 +54,11 @@ public class SettingsPanel {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		initializeSettingsButtons();
-		
+
 		initializeMainButtons();
-		
+
 		initializeNewLevelButton();
 	}
 
@@ -67,15 +67,15 @@ public class SettingsPanel {
 		btnCreateNewLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NewLevel other= null;
-				 try {
+				try {
 					other= new NewLevel();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				 other.frame.setVisible(true);
-				 frame.setVisible(false);
-				
+				other.frame.setVisible(true);
+				frame.setVisible(false);
+
 			}
 		});
 		btnCreateNewLevel.setBounds(302, 123, 113, 23);
@@ -83,24 +83,12 @@ public class SettingsPanel {
 	}
 
 	private void initializeMainButtons() {
-		JButton btnMainMenu = new JButton("Main menu");
-		btnMainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				MenuPanel other = null;
-				try {
-					other = new MenuPanel();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				other.frame.setVisible(true);
-				frame.setVisible(false);
-				
-			}
-		});
-		btnMainMenu.setBounds(302, 192, 111, 23);
-		frame.getContentPane().add(btnMainMenu);
-		
+		initializeMainMenuButton();
+
+		initializePlayButton();
+	}
+
+	private void initializePlayButton() {
 		JButton btnPlay = new JButton("PLAY");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -112,7 +100,7 @@ public class SettingsPanel {
 					e.printStackTrace();
 				}
 				playPressed(other);
-				}
+			}
 
 			private void playPressed(PlayPanel other) {
 				int number=0;
@@ -125,7 +113,7 @@ public class SettingsPanel {
 					JOptionPane.showMessageDialog(frame, "You have to insert the number of ogres!");
 					return;
 				}
-				
+
 				try { 
 					guard = (String) guardPersonality.getItemAt(guardPersonality.getSelectedIndex());
 
@@ -133,7 +121,7 @@ public class SettingsPanel {
 					JOptionPane.showMessageDialog(frame, "You have to select the personality of guard!");
 				}
 				if ( number >5 || number <0) {
-					
+
 					JOptionPane.showMessageDialog(frame, "You have to insert a positive number less than 5!");
 					number=Integer.parseInt(numberOgres.getText());
 				}
@@ -141,19 +129,34 @@ public class SettingsPanel {
 				int ogresNumber=Integer.parseInt(numberOgres.getText());
 				other.setGuard(guard);
 				other.setOgresNumber(ogresNumber);
-				System.out.println(ogresNumber);
-				System.out.println(other.ogresNumber);
-
 				other.game.start(guard,ogresNumber);
-				
 				other.frame.setVisible(true);
-				System.out.println(other.game.numberOgres);
 				frame.setVisible(false);
-				
+
 			}
 		});
 		btnPlay.setBounds(302, 157, 111, 23);
 		frame.getContentPane().add(btnPlay);
+	}
+
+	private void initializeMainMenuButton() {
+		JButton btnMainMenu = new JButton("Main menu");
+		btnMainMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MenuPanel other = null;
+				try {
+					other = new MenuPanel();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				other.frame.setVisible(true);
+				frame.setVisible(false);
+
+			}
+		});
+		btnMainMenu.setBounds(302, 192, 111, 23);
+		frame.getContentPane().add(btnMainMenu);
 	}
 
 	private void initializeSettingsButtons() {
@@ -163,18 +166,18 @@ public class SettingsPanel {
 		numberOgres.setBounds(196, 63, 91, 20);
 		frame.getContentPane().add(numberOgres);
 		numberOgres.setColumns(10);
-		
-	   lblNumberOfOgres = new JLabel("Number of ogres");
+
+		lblNumberOfOgres = new JLabel("Number of ogres");
 		lblNumberOfOgres.setBounds(95, 66, 101, 14);
 		frame.getContentPane().add(lblNumberOfOgres);
-		
-		 guardPersonality = new JComboBox();
+
+		guardPersonality = new JComboBox();
 		guardPersonality.setModel(new DefaultComboBoxModel(new String[] {"Rookie", "Drunken", "Suspicious"}));
 		guardPersonality.setSelectedIndex(0);
 		guardPersonality.setToolTipText("Rookie\r\n");
 		guardPersonality.setBounds(196, 94, 91, 20);
 		frame.getContentPane().add(guardPersonality);
-		
+
 		JLabel lblGuardPersonality = new JLabel("Guard personality");
 		lblGuardPersonality.setBounds(95, 97, 91, 14);
 		frame.getContentPane().add(lblGuardPersonality);
