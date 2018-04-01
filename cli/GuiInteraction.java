@@ -1,4 +1,4 @@
-package dkeep.cli;
+package cli;
 
 import dkeep.logic.*;
 

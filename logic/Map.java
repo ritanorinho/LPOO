@@ -1,4 +1,4 @@
-package dkeep.logic;
+package logic;
 
 public class Map {
 	String[][] map;

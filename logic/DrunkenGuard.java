@@ -1,4 +1,4 @@
-package dkeep.logic;
+package logic;
 
 public class DrunkenGuard extends Guard{
 	//public int testx, testy;

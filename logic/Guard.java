@@ -1,4 +1,4 @@
-package dkeep.logic;
+package logic;
 
 public abstract class Guard extends Character {
 	

@@ -1,4 +1,4 @@
-package dkeep.logic;
+package logic;
 
 public class Hero extends Character {
 	public boolean hasKey=false;

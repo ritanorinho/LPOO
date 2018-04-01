@@ -1,4 +1,4 @@
-package dkeep.logic;
+package logic;
 
 import java.util.Objects;
 

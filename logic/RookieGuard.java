@@ -1,4 +1,5 @@
-package dkeep.logic;
+package logic;
+
 
 public class RookieGuard extends Guard{
 	int length=1;
