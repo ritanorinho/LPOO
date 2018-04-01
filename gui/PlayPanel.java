@@ -251,6 +251,19 @@ public class PlayPanel {
 		guardPersonality = new JComboBox();
 		guardPersonality.setModel(new DefaultComboBoxModel(new String[] {"Rookie", "Drunken", "Suspicious"}));
 
+		selectGuardPersonality();
+		GridBagConstraints gbc_guardPersonality = new GridBagConstraints();
+		gbc_guardPersonality.gridwidth = 2;
+		gbc_guardPersonality.insets = new Insets(0, 0, 5, 0);
+		gbc_guardPersonality.fill = GridBagConstraints.HORIZONTAL;
+		gbc_guardPersonality.gridx = 2;
+		gbc_guardPersonality.gridy = 2;
+		settings.add(guardPersonality, gbc_guardPersonality);
+
+		guardPersonality.setEnabled(false);
+		frame.getContentPane().add(settings);
+	}
+	public void selectGuardPersonality() {
 		switch(guard) {
 		case "Rookie":
 			guardPersonality.setSelectedIndex(0);
@@ -266,16 +279,6 @@ public class PlayPanel {
 			break;
 
 		}
-		GridBagConstraints gbc_guardPersonality = new GridBagConstraints();
-		gbc_guardPersonality.gridwidth = 2;
-		gbc_guardPersonality.insets = new Insets(0, 0, 5, 0);
-		gbc_guardPersonality.fill = GridBagConstraints.HORIZONTAL;
-		gbc_guardPersonality.gridx = 2;
-		gbc_guardPersonality.gridy = 2;
-		settings.add(guardPersonality, gbc_guardPersonality);
-
-		guardPersonality.setEnabled(false);
-		frame.getContentPane().add(settings);
 	}
 	private void initializeNumberOgresTextField() {
 		JLabel lblNumberOfOgres = new JLabel("Number of ogres");
