@@ -158,7 +158,7 @@ public class Gamestate {
 		}
 
 		else {
-			setOgres(ogres); //generates the vector of ogres
+			setOgres(ogres); //generates the array of ogres
 		}
 	}
 	public void startApplication(String guard, int numberOgres) {
@@ -182,14 +182,6 @@ public class Gamestate {
 			RookieGuard rookie2=new RookieGuard();
 			setGuard(rookie2);
 
-		}
-		for(int i =0; i <numberOgres;++i) {
-			auxOgre.setX(1);
-			auxOgre.setY(4);
-			club.setX(2);
-			club.setY(4);
-			auxOgre.setClub(club);
-			ogres.add(i,auxOgre);
 		}
 		setOgres(ogres);
 	}
